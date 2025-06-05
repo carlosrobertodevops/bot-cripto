@@ -2,8 +2,8 @@
 const axios = require("axios");
 
 const SYMBOL = "BTCUSDT";
-const BUY_PRICE = 101554.108;
-const SELL_PRICE = 10433.05;
+const BUY_PRICE = 101700.00;
+const SELL_PRICE = 101619.05;
 
 const API_URL = "https://testnet.binance.vision";
 
@@ -14,6 +14,14 @@ async function start() {
 
   console.clear();
   console.log('Price: ', price);
+
+  if (price <= BUY_PRICE) 
+    console.log('Comprar');
+  else if (price >= SELL_PRICE) 
+    console.log('Vender');
+  else
+    console.log('Esperar');
+
 }
 
 setInterval(start, 3000);
