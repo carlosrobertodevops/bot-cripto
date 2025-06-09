@@ -1,6 +1,6 @@
-
 const crypto = require("crypto");
 const axios = require("axios");
+require('dotenv').config();
 
 export const getExportVariable = localVariable;
 
@@ -8,8 +8,8 @@ const SYMBOL = "BTCUSDT";
 const BUY_PRICE = 108000.00;
 const SELL_PRICE = 108500.00;
 const QUANTITY = 0.001;
-const API_KEY = .API_KEY; //"ugIv9PSaLuDNunJBxdQbulDEeO3u4f1JnxPfV13oAXY5i81e4ld8KGErGbtTKGms";
-const SECRET_KEY = //"vgaqboO2jogaDMa1aYoYiZzxCKgJxAnJQec0MUjagkqf3m5Hef2KC6VEbjAhTaDo";
+const API_KEY = process.env.API_KEY;
+const SECRET_KEY = process.env.SECRET_KEY;
 
 const API_URL = "https://testnet.binance.vision";
 
