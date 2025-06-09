@@ -2,12 +2,14 @@
 const crypto = require("crypto");
 const axios = require("axios");
 
+export const getExportVariable = localVariable;
+
 const SYMBOL = "BTCUSDT";
 const BUY_PRICE = 108000.00;
 const SELL_PRICE = 108500.00;
 const QUANTITY = 0.001;
-const API_KEY = "ugIv9PSaLuDNunJBxdQbulDEeO3u4f1JnxPfV13oAXY5i81e4ld8KGErGbtTKGms";
-const SECRET_KEY = "vgaqboO2jogaDMa1aYoYiZzxCKgJxAnJQec0MUjagkqf3m5Hef2KC6VEbjAhTaDo";
+const API_KEY = .API_KEY; //"ugIv9PSaLuDNunJBxdQbulDEeO3u4f1JnxPfV13oAXY5i81e4ld8KGErGbtTKGms";
+const SECRET_KEY = //"vgaqboO2jogaDMa1aYoYiZzxCKgJxAnJQec0MUjagkqf3m5Hef2KC6VEbjAhTaDo";
 
 const API_URL = "https://testnet.binance.vision";
 
@@ -59,6 +61,12 @@ async function newOrder(symbol, quantity, side) {
     .digest("hex");
 
   order.signature = signature;
+
+  try {
+
+  } catch (err) {
+    console.error(err.response.data);
+  }
 
 }
 
