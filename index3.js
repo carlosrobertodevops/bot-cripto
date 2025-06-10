@@ -2,14 +2,13 @@ const crypto = require("crypto");
 const axios = require("axios");
 require('dotenv').config();
 
-export const getExportVariable = localVariable;
-
 const SYMBOL = "BTCUSDT";
 const BUY_PRICE = 108000.00;
 const SELL_PRICE = 108500.00;
-const QUANTITY = 0.001;
+const QUANTITY = 0.0001;
 const API_KEY = process.env.API_KEY;
 const SECRET_KEY = process.env.SECRET_KEY;
+
 
 const API_URL = "https://testnet.binance.vision";
 
@@ -36,22 +35,25 @@ async function start() {
 
   console.log('Is Opened? ', isOpened);
 
-  // Preco 10% mais barato 
-  if (price <= (sma21 * 0.9) && !isOpened) {
-    console.log('Comprar');
+  // Preco 10% mais barato
+  // if (price <= (sma21 * 0.9) && !isOpened) {
+  if (price <= 115000 && !isOpened) {
+    // console.log('Comprar');
     isOpened = true;
+    newOrder(SYMBOL, QUANTITY, 'buy');
   }
   // Vender com preço 10% mais caro
   else if (price >= (sma21 * 1.1) && isOpened) {
-    console.log('Vender');
+    // console.log('Vender');
     isOpened = false;
+    newOrder(SYMBOL, QUANTITY, 'sell')
   }
   else
-    console.log('Esperar');
+    console.log('aguardar');
 }
 
 async function newOrder(symbol, quantity, side) {
-  const order = { side, quantity, side };
+  const order = { symbol, quantity, side };
   order.type = "MARKET";
   order.timestamp = Date.now();
 
@@ -63,11 +65,16 @@ async function newOrder(symbol, quantity, side) {
   order.signature = signature;
 
   try {
-
-  } catch (err) {
+    const { data } = await axios.post(
+      API_URL + "/api/v3/order",
+      new URLSearchParams(order).toString(),
+      { headers: { "X-MBX-APIKEY": API_KEY } }
+    )
+    console.log(data);
+  }
+  catch (err) {
     console.error(err.response.data);
   }
-
 }
 
 setInterval(start, 3000);
