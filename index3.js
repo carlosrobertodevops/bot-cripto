@@ -1,6 +1,7 @@
+require('dotenv').config();
+
 const crypto = require("crypto");
 const axios = require("axios");
-require('dotenv').config();
 
 const SYMBOL = "BTCUSDT";
 const BUY_PRICE = 108000.00;
